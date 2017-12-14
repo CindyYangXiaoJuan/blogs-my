@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <link rel="stylesheet" href="/node_modules/bootstrap/dist/css/bootstrap.css">
+</head>
+
+<body>
+  {{include '../_includes/header.html'}}
+  <section class="container">
+  <div class="row">
+    <div class="col-md-5">
+      <form id="form-new">
+        <div class="form-group">
+          <label for="categoryId">选择板块</label>
+          <select class="form-control" id="categoryId" name="categoryId">
+            {{ each topicCategories }}
+            <option value="{{ $value.id }}">{{ $value.name }}</option>
+            {{ /each }}
+          </select>
+        </div>
+        <div class="form-group">
+          <label for="title">标题</label>
+          <input type="text" class="form-control" name="title" id="title" placeholder="Email">
+        </div>
+        <div class="form-group">
+          <label for="content">内容</label>
+          <textarea class="form-control" name="content" id="content" rows="3"></textarea>
+        </div>
+        <button type="submit" class="btn btn-default">Submit</button>
+      </form>
+    </div>
+  </div>
+</section>
+  {{include '../_includes/footer.html'}}
+  <script src="/node_modules/jquery/dist/jquery.js"></script>
+  <script src="/node_modules/bootstrap/dist/js/bootstrap.js"></script>
+  <script>
+    $('#form-new').on("submit", function (e) {
+      e.preventDefault();
+      $.post('/topic/new', $(this).serialize(), function (data) {
+        switch(data.code) {
+          case 0:
+            window.location.href = '/topic/' + data.topicId;
+            break;
+          case 500:
+            window.alert('发布失败,稍后重试');
+            break;
+        }
+      });
+    });
+  </script>
+</body>
+
+</html>

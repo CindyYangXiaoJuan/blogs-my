@@ -1,0 +1,33 @@
+{
+  "name": "blogs-my",
+  "version": "1.0.0",
+  "description": "> 一个基于node.js + MySQL开发的blogs",
+  "main": "app.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/CindyYangXiaoJuan/blogs-my.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/CindyYangXiaoJuan/blogs-my/issues"
+  },
+  "homepage": "https://github.com/CindyYangXiaoJuan/blogs-my#readme",
+  "dependencies": {
+    "art-template": "^4.12.2",
+    "body-parser": "^1.18.2",
+    "bootstrap": "^3.3.7",
+    "express": "^4.16.2",
+    "express-art-template": "^1.0.0",
+    "express-session": "^1.15.6",
+    "jquery": "^3.2.1",
+    "marked": "^0.3.7",
+    "md5": "^2.2.1",
+    "mysql": "^2.15.0",
+    "validator": "^9.2.0"
+  }
+}

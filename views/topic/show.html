@@ -1,0 +1,154 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <link rel="stylesheet" href="/node_modules/bootstrap/dist/css/bootstrap.css">
+  <style>
+    .topic-title .action span {
+      font-size: 16px;
+      color: rgba(93, 86, 92, 0.56);
+      cursor: pointer;
+    }
+
+    .topic-title .action span:hover {
+      color: #000;
+    }
+
+    .topic-content {
+      margin-bottom: 50px;
+    }
+  </style>
+</head>
+
+<body>
+  {{include '../_includes/header.html'}}
+  <section class="container">
+    <div class="row">
+      <div class="col-md-9">
+        {{ if !topic }}
+        <div class="alert alert-danger" role="alert">此话题不存在或已被删除。</div>
+        {{ else }}
+        <div class="topic-title">
+          <h1>{{ topic.title }}</h1>
+          <p>发布于 16 分钟前  作者 lipengzhou  4 次浏览  来自 客户端测试</p>
+          
+          <!-- 如果当前文章的作者和当前登陆用户是同一个人，则显示操作权限 -->
+          {{ if (user && topic.userId === user.id) }}
+          <P class="action">
+            <a href="/topic/{{topic.id}}/edit">
+              <span class="glyphicon glyphicon-edit"></span>
+            </a>
+            &nbsp;&nbsp;
+            <a id="remove" href="/topic/{{topic.id}}/delete">
+              <span class="glyphicon glyphicon-remove-circle"></span>
+            </a>
+          </P>
+          {{ /if }}
+          <hr>
+        </div>
+        <div class="topic-content">
+          <!-- 
+            如果输出的内容是 html 则会转移输出（转成字符串）
+            如果需要输出 html 则使用下面的语句输出
+           -->
+          <article class="markdown-body">{{@topic.content}}</article>
+        </div>
+        <div class="panel panel-default">
+          <div class="panel-heading">
+            <span>lipengzhou</span> commented
+            <span>24 minutes ago</span>
+            <span class="action">
+            <a href=""><i class="glyphicon glyphicon-thumbs-up pull-right"></i></a>
+            <a href=""><i class="glyphicon glyphicon-remove-circle pull-right"></i></a>
+            <a href=""><i class="glyphicon glyphicon-remove-circle pull-right"></i></a>
+          </span>
+          </div>
+          <div class="panel-body">
+            评论测试
+          </div>
+        </div>
+        <div class="panel panel-default">
+          <div class="panel-heading">
+            <span>lipengzhou</span> commented
+            <span>24 minutes ago</span>
+            <span class="action">
+            <a href=""><i class="glyphicon glyphicon-thumbs-up pull-right"></i></a>
+            <a href=""><i class="glyphicon glyphicon-remove-circle pull-right"></i></a>
+            <a href=""><i class="glyphicon glyphicon-remove-circle pull-right"></i></a>
+          </span>
+          </div>
+          <div class="panel-body">
+            评论测试
+          </div>
+        </div>
+        <div class="panel panel-default">
+          <div class="panel-heading">
+            <span>lipengzhou</span> commented
+            <span>24 minutes ago</span>
+            <span class="action">
+            <a href=""><i class="glyphicon glyphicon-thumbs-up pull-right"></i></a>
+            <a href=""><i class="glyphicon glyphicon-remove-circle pull-right"></i></a>
+            <a href=""><i class="glyphicon glyphicon-remove-circle pull-right"></i></a>
+          </span>
+          </div>
+          <div class="panel-body">
+            评论测试
+          </div>
+        </div>
+        <div class="panel panel-default">
+          <div class="panel-heading">
+            <span>lipengzhou</span> commented
+            <span>24 minutes ago</span>
+            <span class="action">
+            <a href=""><i class="glyphicon glyphicon-thumbs-up pull-right"></i></a>
+            <a href=""><i class="glyphicon glyphicon-remove-circle pull-right"></i></a>
+            <a href=""><i class="glyphicon glyphicon-remove-circle pull-right"></i></a>
+          </span>
+          </div>
+          <div class="panel-body">
+            评论测试
+          </div>
+        </div>
+        <div class="panel panel-default">
+          <div class="panel-heading">
+            <span>lipengzhou</span> commented
+            <span>24 minutes ago</span>
+            <span class="action">
+            <a href=""><i class="glyphicon glyphicon-thumbs-up pull-right"></i></a>
+            <a href=""><i class="glyphicon glyphicon-remove-circle pull-right"></i></a>
+            <a href=""><i class="glyphicon glyphicon-remove-circle pull-right"></i></a>
+          </span>
+          </div>
+          <div class="panel-body">
+            评论测试
+          </div>
+        </div>
+        <hr>
+        <form>
+          <div class="form-group">
+            <label for="exampleInputPassword1">添加回复</label>
+            <textarea class="form-control" name="" id="" cols="10" rows="4"></textarea>
+          </div>
+          <button type="submit" class="btn btn-success">回复</button>
+        </form>
+        {{ /if }}
+      </div>
+    </div>
+  </section>
+  {{include '../_includes/footer.html'}}
+  <script src="/node_modules/jquery/dist/jquery.js"></script>
+  <script src="/node_modules/bootstrap/dist/js/bootstrap.js"></script>
+  <script>
+    $('#remove').on('click', handleRemoveClick)
+
+    function handleRemoveClick() {
+      if (!window.confirm('确定要删除此话题吗？')) {
+        // 组织 a 链接的默认请求行为
+        return false
+      }
+    }
+  </script>
+</body>
+
+</html>
